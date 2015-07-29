@@ -1,0 +1,26 @@
+<form class="form-inline">
+	<div class="input-group" ng-class="{'has-error': showError}">
+		<span class="input-group-addon">EN</span>
+		<input class="form-control word" ng-model="word.en" placeholder="impact" ng-minlength="1">
+	</div>
+	<div class="input-group">
+		<span class="input-group-addon">RU</span>
+		<input id="ru-word" class="form-control" ng-model="word.ru" placeholder="влияние" ng-minlength="1">
+	</div>
+	<button class="btn btn-primary" ng-click="add()" blur-me="add" has-error="{{showError}}">Добавить</button>	
+</form>
+<table class="table table-stripped">
+	<thead>
+		<tr>
+			<th>EN</th>
+			<th>RU</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="(en, ru) in words">
+			<td>{{en}}</td>
+			<td>{{ru.slice(0, 3) | wordWithComma}}</td>
+		</tr>
+	</tbody>
+</table>
+<button class="btn btn-danger" ng-click="save()" blur-me="save">Сохранить</button>	

@@ -1,0 +1,21 @@
+<p>This is the partial for view 2.</p>
+<p>
+  Showing of 'interpolate' filter:
+  {{ 'Current version is v%VERSION%.' | interpolate }}
+</p>
+<button class="btn btn-danger" ng-click="startTest()">START TEST</button>
+<div class="test" ng-show="en.length">
+	<form>
+		<div class="test-title">
+			<span>{{questionIndex}} из {{questionCount}}</span>
+		</div>
+		<div class="test-content">
+			<h2>{{en}}</h2>
+			<input class="input-lg word" ng-model="myAnswer">
+		</div>
+		<div class="test-footer">
+			<button class="btn btn-primary" ng-click="check()" ng-show="en.length" blur-me>Next</button>
+		</div>
+	</form>
+</div>
+<button class="btn btn-primary" ng-click="endTest()" ng-show="testBegin">END TEST</button>
