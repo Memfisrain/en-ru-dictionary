@@ -21,8 +21,8 @@ config(['$routeProvider', function($routeProvider) {
 		save: {method: "POST"}
 	});
 }])*/
-.factory('Vocabulary',['$resource', function($resource) {
-	return $resource("/words");
+.factory('Vocabulary',['$http', function($http) {
+	return $http.get("/allwords");
 }])
 .directive('blurMe', ['$animate', function($animate){
 	// Runs during compile

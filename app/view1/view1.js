@@ -8,16 +8,22 @@ angular.module('myApp.view1', ['ngRoute'])
     controller: 'View1Ctrl',
     resolve: {
     	words: ["Vocabulary", function(Vocabulary) {
-    		return Vocabulary.get();
+    		return Vocabulary.then(function(obj) {
+    			return obj.data;
+    		});
     	}]
     }
   });
 }])
 .controller('View1Ctrl', ["$scope", "words", "$http", function($scope, words, $http) {
 	var newWords = Object.create(null);
+	$scope.words = {};
 
 	$scope.showError = false;
-	$scope.words = words;
+
+	words.forEach(function(o) {
+		$scope.words[o.word] = o.translate;
+	});
 
 	$scope.word = {
 		en: "property",

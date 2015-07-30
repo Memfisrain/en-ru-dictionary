@@ -14,14 +14,16 @@ var app = express();
 
 app.use(bodyParser());
 
-app.use("/words", function(req, res, next) {
+app.use("/allwords", function(req, res, next) {
 	MongoClient.connect('mongodb://localhost:27017/chat', function(err, db) {
 	  if (err) throw err;
 
 	  var collection = db.collection("vocabulary");
 
 	  collection.find().toArray(function(err, docs) {
-	  	console.log(docs.length);
+	  	var o = {};
+	  	o.words = docs;
+	  	res.send(docs);
 	  	db.close();
 	  })
 	});
@@ -71,32 +73,18 @@ app.use("/save", function(req, res, next) {
 	}
 
 	MongoClient.connect('mongodb://localhost:27017/chat', function(err, db) {
-	  assert.equal(null, err);
 	  if (err) throw err;
 
 	  var collection = db.collection("vocabulary");
 
-	  collection.insertMany(wordsArray, function(err, docs) {
-	  	collection.findOne({word: "book"}, function(err, item) {
-	  		if (err) throw err;
-	  		console.log(item);
-	  		db.close();
-	  		res.status(200).end();
-	  	});
+	  collection.insertMany(wordsArray, function(err, results) {
+	  	if (err) throw err;
+	  	console.log(results);
+	  	db.close();
+	  	res.status(200).end();	
 	  });
 	});
 
-	
-	/*var str = ",\n" + JSON.stringify(data, formatingData, 2).slice(1, -1);
-
-	fs.appendFile("app/words/words.json", str, function(err) {
-		if (err) {
-			throw err;
-		}
-
-		console.log("New data added to file is successfully");
-		res.end();
-	});*/
 });
 
 app.use("/", function(req, res, next) {
