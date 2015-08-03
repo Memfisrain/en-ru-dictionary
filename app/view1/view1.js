@@ -16,14 +16,28 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 .controller('View1Ctrl', ["$scope", "words", "$http", function($scope, words, $http) {
-	var newWords = Object.create(null);
-	$scope.words = {};
-
-	$scope.showError = false;
+	var newWords = [];
+	var enWords = [];
 
 	words.forEach(function(o) {
-		$scope.words[o.word] = o.translate;
+		enWords.push(o.en);
 	});
+
+	$scope.words = words;
+	$scope.showError = false;
+	$scope.search = "";
+	$scope.predicate = null; // predicate for order of words
+	$scope.reverse = false; // determine reverse order of words
+
+	$scope.order = function(predicate) {
+		if ($scope.predicate === predicate) {
+			$scope.reverse = !$scope.reverse;
+			return;
+		}
+
+		$scope.reverse = false;
+		$scope.predicate = predicate;
+	};
 
 	$scope.word = {
 		en: "property",
@@ -36,10 +50,12 @@ angular.module('myApp.view1', ['ngRoute'])
 		var wordLowCase = $scope.word.en.toLowerCase();
 		$scope.showError = false;
 
-		if (!wordLowCase || wordLowCase in $scope.words) {
+		if ( !wordLowCase || enWords.indexOf(wordLowCase) !== -1 ) {
 			$scope.showError = true;
 			return;
 		}
+
+		console.log($scope.$$watchers);
 
 		reqCount++;
 
@@ -52,9 +68,17 @@ angular.module('myApp.view1', ['ngRoute'])
 				measurePerf();
 
 				if (data) {
-					$scope.words[wordLowCase] = newWords[wordLowCase] = data;
+					var newWordObj = {en: wordLowCase, ru: data[0], allRu: data}
+					$scope.words.push(newWordObj);
+
+					enWords.push(wordLowCase);
+
+					newWords.push(newWordObj);
+
 					$scope.word.ru = $scope.word.en = "";
 					console.log(newWords);
+				} else {
+					$scope.showError = true;
 				}
 			})
 			.error(function(data, status, header) {
@@ -63,17 +87,13 @@ angular.module('myApp.view1', ['ngRoute'])
 	};
 
 	$scope.save = function() {
-		/*$http.post("/save", $scope.words).success(function(data, status, headers, config) {
-			console.log(status);
-		});*/
-
-		if (!Object.keys(newWords).length) return;
+		if (!newWords.length) return;
 
 		$http.post("/save", newWords).success(function(data, status, headers, config) {
 			console.log(status);
 		});
 
-		newWords = Object.create(null);
+		newWords = [];
 	};
 
 

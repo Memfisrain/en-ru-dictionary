@@ -4,7 +4,12 @@
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p>
 <button class="btn btn-danger" ng-click="startTest()">START TEST</button>
-<div class="test" ng-show="en.length">
+<span ng-bind="time"></span>
+<span ng-bind="mistakeCount"></span>
+<div>
+	<label for="countWords">Введите количество слов для теста</label><input ng-model="countWords" placeholder="20">
+</div>
+<div class="test" ng-show="testBegin">
 	<form>
 		<div class="test-title">
 			<span>{{questionIndex}} из {{questionCount}}</span>
@@ -19,3 +24,9 @@
 	</form>
 </div>
 <button class="btn btn-primary" ng-click="endTest()" ng-show="testBegin">END TEST</button>
+<!-- <button class="btn btn-primary my-end-button"><div id="innerDiv" ng-click="divClick($event)">TEST</div></button> -->
+<button class="btn btn-primary my-end-button" ng-click="divClick($event)">Test</button>
+<my-button>Test</my-button>
+<button ng-click="setValue1()">Setvalue1</button>
+<button ng-click="setValue2()">Setvalue2</button>
+

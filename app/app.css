@@ -40,3 +40,79 @@
   padding: 15px;
   border: 1px solid black;
 }
+
+.table th {
+  height: 30px;
+  position: relative;
+  transition: all 0.2s ease-in;
+}
+
+.table th:hover {
+  cursor: pointer;
+  border-bottom: 2px solid rgba(0,150,210, 0.5);
+}
+
+.table th > span {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  transition: all 0.2s ease;
+}
+
+.table th:hover > span {
+  left: 20px;
+  top: 1px;
+  color: rgba(0, 0, 210, 0.5);
+}
+
+.my-button {
+  margin-left: 30px;
+  width: 90px;
+  transition: all 0.2s ease-in;
+  box-shadow: 0 0 7px rgba(0,0,0,0.5);
+}
+
+.my-button:hover {
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  width: 100px;
+}
+
+.my-input + .my-addon {
+  color : red;
+}
+
+.my-end-button {
+  position: relative;
+  width: 80px;
+  height: 40px;
+  margin-left: 100px;
+  overflow: hidden;
+  box-shadow: -1px 1px 3px 1px rgba(130,130,130,.4);
+  transition: .2s all;
+}
+
+.my-end-button:focus,
+.my-end-button:active:focus,
+.my-end-button.active:focus,
+.my-end-button.focus,
+.my-end-button:active.focus,
+.my-end-button.active.focus {
+  outline: none;
+}
+
+.my-end-button:focus {
+  background-color: #337ab7;
+}
+
+.circle {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 90px;
+  width: 2px;
+  height: 2px;
+  background: #FFF;
+  opacity: .2;
+  transition: .4s all;
+}
+
+

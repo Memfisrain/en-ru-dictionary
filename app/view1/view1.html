@@ -1,26 +1,28 @@
-<form class="form-inline">
+<form class="form-inline my-form">
 	<div class="input-group" ng-class="{'has-error': showError}">
-		<span class="input-group-addon">EN</span>
-		<input class="form-control word" ng-model="word.en" placeholder="impact" ng-minlength="1">
+		<span class="input-group-addon my-addon">EN</span>
+		<input class="form-control word my-input" ng-model="word.en" placeholder="impact" ng-minlength="1">
 	</div>
 	<div class="input-group">
 		<span class="input-group-addon">RU</span>
-		<input id="ru-word" class="form-control" ng-model="word.ru" placeholder="влияние" ng-minlength="1">
+		<input id="ru-word" class="form-control my-input" ng-model="word.ru" placeholder="влияние" ng-minlength="1">
 	</div>
-	<button class="btn btn-primary" ng-click="add()" blur-me="add" has-error="{{showError}}">Добавить</button>	
+	<button class="btn btn-primary my-button" ng-click="add()" blur-me="add" has-error="{{showError}}">Добавить</button>
+	<input ng-model="search" placeholder="search">
 </form>
+<br>
 <table class="table table-stripped">
 	<thead>
 		<tr>
-			<th>EN</th>
-			<th>RU</th>
+			<th ng-click="order('en')"><span>EN</span></th>
+			<th ng-click="order('ru')"><span>RU</span></th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="(en, ru) in words">
-			<td>{{en}}</td>
-			<td>{{ru.slice(0, 3) | wordWithComma}}</td>
+		<tr ng-repeat="word in ::words | filter : search | orderBy : predicate : reverse">
+			<td>{{::word.en}}</td>
+			<td>{{::word.allRu.slice(0, 3) | wordWithComma}}</td>
 		</tr>
 	</tbody>
 </table>
-<button class="btn btn-danger" ng-click="save()" blur-me="save">Сохранить</button>	
+<button class="btn btn-danger" ng-click="save()" blur-me="save">Сохранить</button>

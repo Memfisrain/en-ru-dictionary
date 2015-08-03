@@ -21,8 +21,6 @@ app.use("/allwords", function(req, res, next) {
 	  var collection = db.collection("vocabulary");
 
 	  collection.find().toArray(function(err, docs) {
-	  	var o = {};
-	  	o.words = docs;
 	  	res.send(docs);
 	  	db.close();
 	  })
@@ -38,6 +36,7 @@ app.use("/search", function(req, res, next) {
 			}, 
 			function(error, response, body) {
 				if (!error) {
+					console.log(response);
 					var parsedBody = response.body.replace(/,{2,}/g, ",").replace(/\[,/g, "[");
 					var content = JSON.parse(parsedBody);
 					var mainWord = content[0][0][0];
@@ -52,10 +51,8 @@ app.use("/search", function(req, res, next) {
 							return cur;
 						}, [mainWord]);
 					}
+					console.log(allWords);
 
-					/*res.writeHead(200, {'Content-Type': 'application/json'});
-					res.write(JSON.stringify(allWords));
-					res.end();*/
 					res.send(allWords);
 				} else {
 					console.log("Произошла ошибка при получение страницы результатов поиска");
@@ -66,18 +63,18 @@ app.use("/search", function(req, res, next) {
 
 app.use("/save", function(req, res, next) {
 	var data = req.body;
-	var wordsArray = [];
+	/*var wordsArray = [];
 
 	for (var word in data) {
 		wordsArray.push({ word: word, translate: data[word] });
-	}
+	}*/
 
 	MongoClient.connect('mongodb://localhost:27017/chat', function(err, db) {
 	  if (err) throw err;
 
 	  var collection = db.collection("vocabulary");
 
-	  collection.insertMany(wordsArray, function(err, results) {
+	  collection.insertMany(data, function(err, results) {
 	  	if (err) throw err;
 	  	console.log(results);
 	  	db.close();
@@ -88,16 +85,14 @@ app.use("/save", function(req, res, next) {
 });
 
 app.use("/", function(req, res, next) {
-	/*if (req.path == "/search" || req.path == "/save") {
-		next();
-	} else {*/
-		res.sendFile(__dirname + req.path, function(err) {
-			if (err) {
-				console.log("Error occured");
-			} else {
-				console.log("All good");
-			}
-		});
+	res.sendFile(__dirname + req.path, function(err) {
+		if (err) {
+			console.log("Error occured");
+			console.log(req.path);
+		} else {
+			console.log("All good");
+		}
+	});
 });
 
 
