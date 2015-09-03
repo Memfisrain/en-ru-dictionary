@@ -75,4 +75,42 @@ config(['$routeProvider', function($routeProvider) {
 			})
 		}
 	};
-}] );
+}])
+.directive('myCustomSearch', function(){
+	return {
+		restrict: "A",
+		scope: {},
+		link: function($scope, iElm, iAttrs, controller) {
+			var input = iElm[0];
+			var placeholder = window.document.querySelector(".search-wrap-placeholder");
+			var icon = window.document.querySelector(".search-wrap-icon");
+
+			function inputAddStyle() {
+				placeholder.style.top = "-18px";
+				placeholder.style.fontSize = "85%";
+				placeholder.style.color = icon.style.color = "#F68C04";
+
+			}
+
+			function inputRemoveStyle() {
+				placeholder.style.top = "";
+				placeholder.style.fontSize = "";
+				placeholder.style.color = icon.style.color = "";
+			}
+
+			input.onfocus = function() {
+				inputAddStyle();
+			};
+
+			input.onblur = function() {
+				inputRemoveStyle();
+			};
+
+			placeholder.onclick = function() {
+				input.focus();
+			};
+		}
+	};
+});
+
+

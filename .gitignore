@@ -1,0 +1,6 @@
+node_modules
+e2e-tests
+approvals-min.json
+approvals-new.json
+approvals-orig.json
+words.json

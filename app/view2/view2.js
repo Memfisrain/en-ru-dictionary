@@ -131,6 +131,7 @@ angular.module('myApp.view2', ['ngRoute'])
 					div.style.height = "120px";
 					div.style.top = "-30px";
 					div.style.left = "-30px";
+					div.style.opacity = "0.1";
 					but.blur();
 				}, 0)
 

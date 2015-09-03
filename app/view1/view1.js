@@ -15,9 +15,14 @@ angular.module('myApp.view1', ['ngRoute'])
     }
   });
 }])
-.controller('View1Ctrl', ["$scope", "words", "$http", function($scope, words, $http) {
+.controller('View1Ctrl', ["$scope", "words", "$http", "$filter", "$interpolate", function($scope, words, $http, $filter, $interpolate) {
 	var newWords = [];
 	var enWords = [];
+
+	var context = {greeting: 'Hello', name: undefined };
+	// default "forgiving" mode
+	var exp = $interpolate('{{greeting}} {{name}}!');
+	console.log(exp(context));
 
 	words.forEach(function(o) {
 		enWords.push(o.en);
@@ -26,7 +31,7 @@ angular.module('myApp.view1', ['ngRoute'])
 	$scope.words = words;
 	$scope.showError = false;
 	$scope.search = "";
-	$scope.predicate = null; // predicate for order of words
+	$scope.predicate = ""; // predicate for order of words
 	$scope.reverse = false; // determine reverse order of words
 
 	$scope.order = function(predicate) {
@@ -39,10 +44,16 @@ angular.module('myApp.view1', ['ngRoute'])
 		$scope.predicate = predicate;
 	};
 
-	$scope.word = {
+	$scope.cancel = function() {
+		$scope.words.pop();
+		enWords.pop();
+		newWords.pop();
+	};
+
+	/*$scope.word = {
 		en: "property",
 		ru: "свойство"
-	};
+	};*/
 
 	var reqCount = 0;
 
@@ -68,15 +79,14 @@ angular.module('myApp.view1', ['ngRoute'])
 				measurePerf();
 
 				if (data) {
-					var newWordObj = {en: wordLowCase, ru: data[0], allRu: data}
+					console.log(data);
+					var newWordObj = {en: wordLowCase, ru: data[0], allRu: data};
+
 					$scope.words.push(newWordObj);
-
 					enWords.push(wordLowCase);
-
 					newWords.push(newWordObj);
 
 					$scope.word.ru = $scope.word.en = "";
-					console.log(newWords);
 				} else {
 					$scope.showError = true;
 				}
@@ -104,18 +114,4 @@ angular.module('myApp.view1', ['ngRoute'])
 		}
 	}
 
-	
-	/*$scope.word = {};
-	$scope.vocabulary = Vocabulary.getVocabulary();
-
-	$scope.save = function() {
-		if (!$scope.word.ru || !$scope.word.en) return;
-		Vocabulary.setWord($scope.word.en, $scope.word.ru);
-		refresh();
-	};
-
-	function refresh() {
-		$scope.vocabulary = Vocabulary.getVocabulary();
-		$scope.word.ru = $scope.word.en = "";
-	}*/
 }]);

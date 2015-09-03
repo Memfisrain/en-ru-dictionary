@@ -20,7 +20,7 @@ app.use("/allwords", function(req, res, next) {
 
 	  var collection = db.collection("vocabulary");
 
-	  collection.find().toArray(function(err, docs) {
+	  collection.find().sort({_id: 1}).toArray(function(err, docs) {
 	  	res.send(docs);
 	  	db.close();
 	  })
@@ -36,13 +36,13 @@ app.use("/search", function(req, res, next) {
 			}, 
 			function(error, response, body) {
 				if (!error) {
-					console.log(response);
 					var parsedBody = response.body.replace(/,{2,}/g, ",").replace(/\[,/g, "[");
 					var content = JSON.parse(parsedBody);
 					var mainWord = content[0][0][0];
+					var allWords = [];
 
 					if ( content[1] && Array.isArray(content[1]) ) {
-						var allWords = content[1].reduce(function(cur, next) {
+						allWords = content[1].reduce(function(cur, next) {
 							next[1].forEach(function(v) {
 								if (cur.indexOf(v) === -1) {
 									cur.push(v);
@@ -50,8 +50,9 @@ app.use("/search", function(req, res, next) {
 							});
 							return cur;
 						}, [mainWord]);
+					} else if (mainWord) {
+						allWords[0] = mainWord;
 					}
-					console.log(allWords);
 
 					res.send(allWords);
 				} else {
@@ -87,7 +88,7 @@ app.use("/save", function(req, res, next) {
 app.use("/", function(req, res, next) {
 	res.sendFile(__dirname + req.path, function(err) {
 		if (err) {
-			console.log("Error occured");
+			console.log("Error occured at path: ", req.path);
 			console.log(req.path);
 		} else {
 			console.log("All good");

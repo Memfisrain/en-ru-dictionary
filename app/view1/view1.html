@@ -1,3 +1,13 @@
+<div ng-init="username='A user'">
+  <p ng-init="apptitle='Escaping demo'">{{apptitle}}: \{\{ username = "defaced value"; \}\}
+    </p>
+  <p><strong>{{username}}</strong> attempts to inject code which will deface the
+    application, but fails to accomplish their task, because the server has correctly
+    escaped the interpolation start/end markers with REVERSE SOLIDUS U+005C (backslash)
+    characters.</p>
+  <p>Instead, the result of the attempted script injection is visible, and can be removed
+    from the database by an administrator.</p>
+</div>
 <form class="form-inline my-form">
 	<div class="input-group" ng-class="{'has-error': showError}">
 		<span class="input-group-addon my-addon">EN</span>
@@ -8,10 +18,16 @@
 		<input id="ru-word" class="form-control my-input" ng-model="word.ru" placeholder="влияние" ng-minlength="1">
 	</div>
 	<button class="btn btn-primary my-button" ng-click="add()" blur-me="add" has-error="{{showError}}">Добавить</button>
-	<input ng-model="search" placeholder="search">
+	<div class="search-wrap">
+		<i class="glyphicon glyphicon-search search-wrap-icon"></i>
+		<span class="search-wrap-placeholder">search</span>
+		<input class="search-wrap-input" ng-model="search" my-custom-search>
+	</div>
+	<div><label>Reverse<input type="checkbox" ng-model="reverse"></label></div>
+	<div><button ng-click="cancel()">Отменить</button></div>
 </form>
 <br>
-<table class="table table-stripped">
+<table class="table table-stripped my-table">
 	<thead>
 		<tr>
 			<th ng-click="order('en')"><span>EN</span></th>
@@ -19,9 +35,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="word in ::words | filter : search | orderBy : predicate : reverse">
-			<td>{{::word.en}}</td>
-			<td>{{::word.allRu.slice(0, 3) | wordWithComma}}</td>
+		<tr ng-repeat="word in words | limitTo : -20 | filter : search | orderBy : predicate : reverse">
+			<td>{{:: word.en}}</td>
+			<td>{{:: word.allRu.slice(0, 3) | wordWithComma}}</td>
 		</tr>
 	</tbody>
 </table>
