@@ -1,4 +1,4 @@
-<div ng-init="username='A user'">
+<!-- <div ng-init="username='A user'">
   <p ng-init="apptitle='Escaping demo'">{{apptitle}}: \{\{ username = "defaced value"; \}\}
     </p>
   <p><strong>{{username}}</strong> attempts to inject code which will deface the
@@ -7,7 +7,7 @@
     characters.</p>
   <p>Instead, the result of the attempted script injection is visible, and can be removed
     from the database by an administrator.</p>
-</div>
+</div> -->
 <form class="form-inline my-form">
 	<div class="input-group" ng-class="{'has-error': showError}">
 		<span class="input-group-addon my-addon">EN</span>
@@ -21,10 +21,26 @@
 	<div class="search-wrap">
 		<i class="glyphicon glyphicon-search search-wrap-icon"></i>
 		<span class="search-wrap-placeholder">search</span>
-		<input class="search-wrap-input" ng-model="search" my-custom-search>
+		<input class="search-wrap-input" ng-model="search.ru" my-custom-search>
 	</div>
-	<div><label>Reverse<input type="checkbox" ng-model="reverse"></label></div>
-	<div><button ng-click="cancel()">Отменить</button></div>
+	<div>
+		<!-- <label>Reverse<input type="checkbox" ng-model="reverse"></label> -->
+		<button type="button" class="btn btn-primary" ng-model="reverse" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+        Reverse
+    </button>
+    <button class="btn btn-danger" ng-click="cancel()">Отменить</button>
+    <div class="btn-group" dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+        Sort by <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+        <li role="menuitem" ng-click="order('ru')"><a href="javascript:">Ru</a></li>
+        <li role="menuitem" ng-click="order('en')"><a href="javascript:">En</a></li>
+        <li class="divider"></li>
+        <li role="menuitem" ng-click="order('')"><a href="javascript:">Unsort</a></li>
+      </ul>
+    </div>
+	</div>
 </form>
 <br>
 <table class="table table-stripped my-table">
