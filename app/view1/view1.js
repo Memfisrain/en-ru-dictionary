@@ -66,8 +66,6 @@ angular.module('myApp.view1', ['ngRoute'])
 			return;
 		}
 
-		console.log($scope.$$watchers);
-
 		reqCount++;
 
 		window.performance.mark("mark_start_xhr");

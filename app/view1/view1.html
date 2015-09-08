@@ -11,17 +11,17 @@
 <form class="form-inline my-form">
 	<div class="input-group" ng-class="{'has-error': showError}">
 		<span class="input-group-addon my-addon">EN</span>
-		<input class="form-control word my-input" ng-model="word.en" placeholder="impact" ng-minlength="1">
+		<input id="en-word" class="form-control word my-input" ng-model="word.en" placeholder="impact" ng-minlength="1">
 	</div>
 	<div class="input-group">
 		<span class="input-group-addon">RU</span>
 		<input id="ru-word" class="form-control my-input" ng-model="word.ru" placeholder="влияние" ng-minlength="1">
 	</div>
-	<button class="btn btn-primary my-button" ng-click="add()" blur-me="add" has-error="{{showError}}">Добавить</button>
+	<button class="btn btn-primary" ng-click="add()" blur-after-add has-error="showError">Добавить</button>
 	<div class="search-wrap">
 		<i class="glyphicon glyphicon-search search-wrap-icon"></i>
 		<span class="search-wrap-placeholder">search</span>
-		<input class="search-wrap-input" ng-model="search.ru" my-custom-search>
+		<input class="search-wrap-input" ng-model="search" my-custom-search>
 	</div>
 	<div>
 		<!-- <label>Reverse<input type="checkbox" ng-model="reverse"></label> -->
@@ -57,4 +57,4 @@
 		</tr>
 	</tbody>
 </table>
-<button class="btn btn-danger" ng-click="save()" blur-me="save">Сохранить</button>
+<button class="btn btn-danger" ng-click="save()" blur-after-save">Сохранить</button>

@@ -1,36 +1,53 @@
 /* app css stylesheet */
-body {
-  padding: 15px;
+body, html {
+ padding: 10px;
+ margin: 0;
+}
+
+.clearfix:after {
+  content: ".";
+  height: 0;
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+#view {
+  padding-top: 80px;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #3F51B5;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 }
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
+  height: 100%;
 }
 
 .menu > li {
-  display: inline;
+  float: left;
+  list-style: none;
 }
 
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+.menu > li > a {
+  padding: 20px 45px;
+  display: block;
+  font-size: 20px;
+  color: #FFF;
+  vertical-align: middle;
 }
 
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+.menu > li > a:hover {
+  text-decoration: none;
+  background-color: #303F9F;
 }
+
 
 .warning {
   color: red;
@@ -86,8 +103,7 @@ body {
 
 .my-end-button {
   position: relative;
-  width: 80px;
-  height: 40px;
+  padding: 10px 20px;
   margin-left: 100px;
   overflow: hidden;
   box-shadow: -1px 1px 3px 1px rgba(130,130,130,.4);
