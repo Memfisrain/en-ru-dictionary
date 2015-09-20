@@ -21,6 +21,11 @@ app.use("/allwords", function(req, res, next) {
 	  var collection = db.collection("vocabulary");
 
 	  collection.find().sort({_id: 1}).toArray(function(err, docs) {
+	  	if (err) {
+	  		console.log("Error occured at operation toArray in getting words from db");
+	  		return;
+	  	}
+
 	  	res.send(docs);
 	  	db.close();
 	  })
@@ -36,11 +41,20 @@ app.use("/search", function(req, res, next) {
 			}, 
 			function(error, response, body) {
 				if (!error) {
+					var reg = /[a-zA-Z]/g;
+
 					var parsedBody = response.body.replace(/,{2,}/g, ",").replace(/\[,/g, "[");
 					var content = JSON.parse(parsedBody);
 					var mainWord = content[0][0][0];
 					var allWords = [];
 
+					if (reg.test(mainWord)) {
+						console.log("Error: translating have english characters");
+						res.status(404).end();
+						return;
+					}
+
+					
 					if ( content[1] && Array.isArray(content[1]) ) {
 						allWords = content[1].reduce(function(cur, next) {
 							next[1].forEach(function(v) {

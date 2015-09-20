@@ -4,6 +4,7 @@
 angular.module('myApp', [
   'ngRoute',
   'ngResource',
+  'ngAnimate',
   'myApp.view1',
   'myApp.view2',
   'myApp.version',
@@ -33,7 +34,7 @@ config(['$routeProvider', function($routeProvider) {
 			hasError: "=",
 		},
 		link: function(scope, iElm, iAttrs, controller) {
-			var enWordInput = window.document.querySelector("#en-word");
+			var enWordInput = window.document.getElementById("en-word");
 			
 			if (!enWordInput.oninput) {
 				enWordInput.oninput = function(e) {
@@ -214,6 +215,51 @@ config(['$routeProvider', function($routeProvider) {
 
 		}
 	};
-}]);
+}])
+.directive('myCheckStatus', function(){
+	// Runs during compile
+	return {
+		restrict: "A",
+		scope: {
+			hasError: "="
+		},
+		link: function($scope, iElm, iAttrs, controller) {
+			var enWordInput = angular.element(window.document.getElementById("my-input"));
+			var button = angular.element(window.document.getElementById("my-get-button"));
+			
+			enWordInput.on("input", function(e) {
+				console.log($scope);
+				if (!$scope.hasError) return;
+
+				$scope.hasError = false;
+				$scope.$apply();
+			});
+			
+			$scope.$watch("hasError", function(n, o) {
+				button.prop("disabled", n);
+				
+				if (n) {
+					button.addClass("my-disabled");
+				} else {
+					button.removeClass("my-disabled")
+				}
+			});
+		}
+	};
+})
+.directive('myGetButton', function(){
+	// Runs during compile
+	return {
+		restrict: "A",
+		scope: {},
+		link: function($scope, iElm, iAttrs, controller) {
+			var enWordInput = window.document.getElementById("my-input");
+
+			iElm.bind("click", function() {
+				enWordInput.focus();
+			});
+		}
+	};
+})
 
 

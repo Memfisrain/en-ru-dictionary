@@ -7,7 +7,7 @@
     characters.</p>
   <p>Instead, the result of the attempted script injection is visible, and can be removed
     from the database by an administrator.</p>
-</div> -->
+</div> 
 <form class="form-inline my-form">
 	<div class="input-group" ng-class="{'has-error': showError}">
 		<span class="input-group-addon my-addon">EN</span>
@@ -24,7 +24,7 @@
 		<input class="search-wrap-input" ng-model="search" my-custom-search>
 	</div>
 	<div>
-		<!-- <label>Reverse<input type="checkbox" ng-model="reverse"></label> -->
+		<label>Reverse<input type="checkbox" ng-model="reverse"></label>
 		<button type="button" class="btn btn-primary" ng-model="reverse" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
         Reverse
     </button>
@@ -57,4 +57,26 @@
 		</tr>
 	</tbody>
 </table>
-<button class="btn btn-danger" ng-click="save()" blur-after-save">Сохранить</button>
+<button class="btn btn-danger" ng-click="save()" blur-after-save">Сохранить</button>-->
+
+<div class="my-container">
+	<form class="word-form">
+		<label id="my-label" for="my-input">Write word</label>
+		<input id="my-input" class="my-input" ng-model="word.en" ng-class="{error: showError, loading: loading}" my-check-status has-error="showError">
+		<button type="submit" id="my-get-button" class="my-get-button" my-get-button ng-click="add()">
+			<span class="glyphicon glyphicon-plus"></span> GET
+		</button>
+		<div class="last-words-container">
+			<span class="last-word" ng-repeat="word in words | limitTo : -5">{{word.en}}</span>
+		</div>
+		<button class="btn btn-danger my-cancel-button" ng-click="cancel()">
+			<span class="glyphicon glyphicon-remove"></span> CANCEL
+		</button>
+		<button class="btn btn-success my-save-button" ng-click="save()">
+			<span class="glyphicon glyphicon-ok"></span> SAVE
+		</button>
+		<div class="progress-container" ng-show="loading">
+			<div class="my-spinner"></div>
+		</div>
+	</form>
+</div>

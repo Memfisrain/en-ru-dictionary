@@ -1,7 +1,4 @@
 /* app css stylesheet */
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700&subset=latin,cyrillic-ext,cyrillic);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin,cyrillic-ext);
-
 body, html {
  padding: 10px;
  margin: 0;
@@ -24,53 +21,31 @@ body, html {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
   z-index: 999;
-  background-color: #FFF;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
-}
-
-.my-title {
-  margin-left: 20px;
-  float: left;
-  color: #00BCD4;
-  font-family: Raleway, sans-serif;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 70px;
-}
-
-.my-title:hover {
-  text-decoration: none;
-  color: #00BCD4;
+  background-color: #3F51B5;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 }
 
 .menu {
-  margin-bottom: 0;
   height: 100%;
-  float: right;
 }
 
 .menu > li {
-  height: 100%;
   float: left;
   list-style: none;
 }
 
 .menu > li > a {
-  padding: 27px 15px;
+  padding: 20px 45px;
   display: block;
-  font-family: Raleway, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #00BCD4;
-  line-height: 16px;
-  //vertical-align: middle;
+  font-size: 20px;
+  color: #FFF;
+  vertical-align: middle;
 }
 
 .menu > li > a:hover {
   text-decoration: none;
-  background-color: #EAEBEB;
+  background-color: #303F9F;
 }
 
 
@@ -219,13 +194,13 @@ html, body {
   height: 100%; 
 }
 
-/* #header {
+#header {
   display: block;
   position: static;
-} */
+}
 
 .my-container {
-  background-color: #EEEEEC;
+  background-color: #F57C00;
   width: 100%;
   height: 100%;
   display: flex;
@@ -240,38 +215,26 @@ html, body {
   position: relative;
   /* border: 1px solid black; */
   text-align: center;
+  font-size: 24px;
 }
 
 
 .my-input {
   margin-top: 70px;
+  height: 40px;
   width: 300px;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #000;
   outline: none;
-  font-size: 18px;
-  color: #999;
-}
-
-#my-label {
-  margin-right: 15px;
-  font-family: RobotoDraft, 'Roboto Medium', Roboto, sans-serif;
-  vertical-align: bottom;
-  font-size: 18px;
-  font-weight: 500;
 }
 
 .last-words-container {
   margin-top: 25px;
-  font-size: 22px;
-  font-family: Roboto, sans-serif;
-  color: #8F8F8F;
 }
 
 .last-word::after {
   content: ", ";
-  padding-right: 5px;
 }
 
 .last-word:last-child::after {
@@ -279,31 +242,16 @@ html, body {
 }
 
 input.error {
-  color: red;
-  border-bottom: 2px solid red;
+  border: 2px solid red;
 }
 
 .my-get-button {
-/*   margin-left: 15px;
-background-color: #20A0F3;
-color: #FFF;
-padding: 3px 10px;
-border: none;
-border-radius: 5px;  */
-  margin-left: 15px;
-  font-family: RobotoDraft, 'Roboto Medium', Roboto, sans-serif;
-  vertical-align: bottom;
-  font-size: 18px;
-  font-weight: 500;
-  border: none;
-  background-color: transparent;
-  color: #20A0F3;
-  outline: none;
-  transition: color .3s ease;
+  background-color: #3F51B5;
+  color: #FFF;
 }
 
-.my-save-button, .my-cancel-button {
-  margin: 25px 5px 0 5px;
+.my-save-button {
+  margin-top: 25px;
 }
 
 .progress-container {
@@ -312,8 +260,8 @@ border-radius: 5px;  */
   height: 2px;
   background-color: #000;
   overflow: hidden;
-  top: 127px;
-  left: 160px;
+  top: 138px;
+  left: 173px;
 }
 
 .my-spinner {
@@ -339,10 +287,9 @@ border-radius: 5px;  */
   animation: leave .5s ease-in;
 } */
 
-.my-disabled {
-  color: #5C5757;
+#my-label {
+  font-family: RobotoDraft, 'Roboto Medium', Roboto, sans-serif;;
 }
-
 
 @keyframes beam {
   from { width: 0; }

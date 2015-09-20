@@ -28,11 +28,14 @@ angular.module('myApp.view1', ['ngRoute'])
 		enWords.push(o.en);
 	});
 
+	$scope.word = {};
+
 	$scope.words = words;
 	$scope.showError = false;
 	$scope.search = "";
 	$scope.predicate = ""; // predicate for order of words
 	$scope.reverse = false; // determine reverse order of words
+	$scope.loading = false;
 
 	$scope.order = function(predicate) {
 		if ($scope.predicate === predicate) {
@@ -50,14 +53,11 @@ angular.module('myApp.view1', ['ngRoute'])
 		newWords.pop();
 	};
 
-	/*$scope.word = {
-		en: "property",
-		ru: "свойство"
-	};*/
-
 	var reqCount = 0;
 
 	$scope.add = function() {
+		if (!$scope.word.en) return;
+
 		var wordLowCase = $scope.word.en.toLowerCase();
 		$scope.showError = false;
 
@@ -70,11 +70,15 @@ angular.module('myApp.view1', ['ngRoute'])
 
 		window.performance.mark("mark_start_xhr");
 
+		$scope.loading = true;
+
 		$http.post("/search", {word: wordLowCase})
 			.success(function(data, status, header, config) {
 				window.performance.mark("mark_end_xhr");
 				window.performance.measure("measure_xhr" + reqCount, "mark_start_xhr", "mark_end_xhr");
 				measurePerf();
+
+				$scope.loading = false;
 
 				if (data) {
 					console.log(data);
@@ -90,6 +94,8 @@ angular.module('myApp.view1', ['ngRoute'])
 				}
 			})
 			.error(function(data, status, header) {
+				$scope.loading = false;
+				$scope.showError = true;
 				console.log(status);
 			});
 	};

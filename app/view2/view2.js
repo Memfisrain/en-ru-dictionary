@@ -22,6 +22,9 @@ angular.module('myApp.view2', ['ngRoute'])
 	$scope.check = check;
 	$scope.endTest = endTest;
 
+	$scope.value1 = 1;
+	$scope.value2 = 1;
+
 	$scope.setValue1 = function() {
 		console.log("increment value 1");
 		$scope.value1 = ++$scope.value1 || 1;
@@ -32,11 +35,11 @@ angular.module('myApp.view2', ['ngRoute'])
 		$scope.value2 = ++$scope.value2 || 1;
 	};
 
-	$scope.$watch("::value1", function(newValue) {
+	$scope.$watch("value1", function(newValue) {
 		console.log("string:", newValue);
 	});
 
-	$scope.$watch("::{key1: value1, key2: value2}", function(newValue) {
+	$scope.$watch("{key1: value1, key2: value2}", function(newValue) {
 		console.log("object:", newValue);
 	}, true);
 
