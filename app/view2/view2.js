@@ -22,27 +22,6 @@ angular.module('myApp.view2', ['ngRoute'])
 	$scope.check = check;
 	$scope.endTest = endTest;
 
-	$scope.value1 = 1;
-	$scope.value2 = 1;
-
-	$scope.setValue1 = function() {
-		console.log("increment value 1");
-		$scope.value1 = ++$scope.value1 || 1;
-	};
-
-	$scope.setValue2 = function() {
-		console.log("increment value 2");
-		$scope.value2 = ++$scope.value2 || 1;
-	};
-
-	$scope.$watch("value1", function(newValue) {
-		console.log("string:", newValue);
-	});
-
-	$scope.$watch("{key1: value1, key2: value2}", function(newValue) {
-		console.log("object:", newValue);
-	}, true);
-
 	var gen, startTime;
 
 	function startTest() {
@@ -52,14 +31,18 @@ angular.module('myApp.view2', ['ngRoute'])
 		$scope.questionIndex = 0;
 		gen = wordSequence();
 		$scope.time = null;
-		$scope.mistakeCount = 0;
+		$scope.correctCount = 0;
+		$scope.incorrectCount = 0;
 		startTime = new Date;
 		next();
+
+		$scope.incorrectAnswers = [];
 	};
 
 	function endTest() {
 		$scope.testBegin = false;
 		$scope.time = ( (new Date - startTime )/ 1000 ).toFixed(2) + "s";
+		$scope.showIncorrectAnswers = true;
 	}
 
 	function next() {
@@ -82,12 +65,13 @@ angular.module('myApp.view2', ['ngRoute'])
 
 	function check() {
 		if ($scope.translate.indexOf($scope.myAnswer) !== -1) {
-			next();
+			$scope.correctCount++;
 		} else {
-			$scope.mistakeCount++;
+			$scope.incorrectCount++;
+			$scope.incorrectAnswers.push({question: $scope.en, answer: $scope.myAnswer});
 		}
-		
-		return;
+
+		next();
 	}
 
 	function getWordsInArbitraryOrder(arr) {

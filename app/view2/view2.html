@@ -1,27 +1,42 @@
 <div class="my-container">
-	<button class="btn btn-danger" ng-click="startTest()">START TEST</button>
-	<span ng-bind="time"></span>
-	<span ng-bind="mistakeCount"></span>
-	<div class="countWordsContainer">
-		<label for="countWords">Введите количество слов для теста</label><input ng-model="countWords" placeholder="20">
+	<div class="test-reqform-container" ng-hide="testBegin">
+		<div class="test-reqform">
+			<label for="countWords">Введите количество слов для теста</label>
+			<input ng-model="countWords" placeholder="20">
+		</div>
+		<div class="my-startbtn-container">
+			<button class="btn btn-danger" ng-click="startTest()">START TEST</button>
+		</div>
 	</div>
 	<div class="test" ng-show="testBegin">
 		<form>
 			<div class="test-title">
 				<span>{{questionIndex}} из {{questionCount}}</span>
+				<div class="indicator-of-answers">
+					<span class="my-time" ng-bind="time"></span>
+					<span class="correct-answer-count">{{correctCount}}</span>
+					<span class="incorrect-answer-count">{{incorrectCount}}</span>
+				</div>
 			</div>
 			<div class="test-content">
 				<h2>{{en}}</h2>
-				<input class="input-lg word" ng-model="myAnswer">
+				<input class="word" ng-model="myAnswer">
 			</div>
 			<div class="test-footer">
 				<button class="btn btn-primary" ng-click="check()" ng-show="en.length" blur-me>Next</button>
 			</div>
 		</form>
+		<button class="my-endbtn" ng-click="endTest()" ng-show="testBegin">&times;</button>
 	</div>
-	<button class="btn btn-primary" ng-click="endTest()" ng-show="testBegin">END TEST</button>
-	<button ng-click="setValue1()">Setvalue1</button>
-	<button ng-click="setValue2()">Setvalue2</button>
+	<div class="incorrect-anwers-list-container" ng-show="showIncorrectAnswers">
+		<ul class="incorrect-answers-list">
+			<li ng-repeat="o in incorrectAnswers">
+				<span>{{o.question}}</span>
+				<span>{{o.answer}}</span>
+			</li>
+		</ul>
+	</div>
+	
 </div>
 
 

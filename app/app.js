@@ -228,7 +228,7 @@ config(['$routeProvider', function($routeProvider) {
 			var button = angular.element(window.document.getElementById("my-get-button"));
 			
 			enWordInput.on("input", function(e) {
-				console.log($scope);
+				console.log("input");
 				if (!$scope.hasError) return;
 
 				$scope.hasError = false;
@@ -237,7 +237,7 @@ config(['$routeProvider', function($routeProvider) {
 			
 			$scope.$watch("hasError", function(n, o) {
 				button.prop("disabled", n);
-				
+
 				if (n) {
 					button.addClass("my-disabled");
 				} else {
