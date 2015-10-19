@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('view1.controller', [])
+	angular.module('myApp.view1')
 		.controller('View1Ctrl', ["$scope", "words", 'dbWordsService', function($scope, words, dbWordsService) {
 			// main
 			var newWords = [],
@@ -51,12 +51,12 @@
 					originalWord = data && data.originalWord;
 		
 				$scope.loading = false;
-				console.log("getWordScsCb");
 		
 				if (allTranslatedWords && originalWord) {
 		
 					addDataToModel(originalWord, allTranslatedWords);
 					$scope.word.ru = $scope.word.en = "";
+					console.log(allTranslatedWords);
 		
 				} else {
 					$scope.showError = true;

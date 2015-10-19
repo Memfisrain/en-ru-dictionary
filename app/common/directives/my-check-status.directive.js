@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('myApp.myCheckStatus', [])
+	angular.module('myApp')
 		.directive('myCheckStatus', function() {
 			// Runs during compile
 			return {

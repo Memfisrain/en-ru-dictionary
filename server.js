@@ -1,16 +1,14 @@
-var http = require("http");
-var fs = require("fs");
-var static = require("node-static");
-var express = require("express");
-var bodyParser = require("body-parser");
-var request = require("request");
-var url = require("url");
-var urlDataMining = "https://translate.google.ru/translate_a/single?client=t&sl=en&tl=ru&hl=ru&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&srcrom=1&ssel=0&tsel=0&kc=6&tk=521364|344733&q=";
-
-var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
-
-var app = express();
+var http = require("http"),
+	fs = require("fs"),
+	static = require("node-static"),
+	express = require("express"),
+	bodyParser = require("body-parser"),
+	request = require("request"),
+	url = require("url"),
+	urlDataMining = "https://translate.google.ru/translate_a/single?client=t&sl=en&tl=ru&hl=ru&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&source=btn&srcrom=1&ssel=0&tsel=0&kc=6&tk=521364|344733&q=",
+	MongoClient = require('mongodb').MongoClient,
+	assert = require('assert'),
+	app = express();
 
 app.use(bodyParser());
 
@@ -30,7 +28,7 @@ app.use("/allwords", function(req, res, next) {
 	  	db.close();
 	  })
 	});
-})
+});
 
 app.use("/search", function(req, res, next) {
 	//var word = url.parse(req.url, true).query.word;
@@ -41,12 +39,11 @@ app.use("/search", function(req, res, next) {
 			}, 
 			function(error, response, body) {
 				if (!error) {
-					var reg = /[a-zA-Z]/g;
-
-					var parsedBody = response.body.replace(/,{2,}/g, ",").replace(/\[,/g, "[");
-					var content = JSON.parse(parsedBody);
-					var mainWord = content[0][0][0];
-					var allWords = [];
+					var reg = /[a-zA-Z]/g,
+						parsedBody = response.body.replace(/,{2,}/g, ",").replace(/\[,/g, "["),
+						content = JSON.parse(parsedBody),
+						mainWord = content[0][0][0],
+						allWords = [];
 
 					if (reg.test(mainWord)) {
 						console.log("Error: translating have english characters");

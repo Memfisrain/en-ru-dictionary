@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('myApp.myBlurAfterSave', [])
+	angular.module('myApp')
 		.directive('myBlurAfterAdd', ['$animate', function($animate){
 			// Runs during compile
 			return {

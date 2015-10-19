@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('myApp.myButton', [])
+	angular.module('myApp')
 		.directive('myButton',  ["$timeout", function($timeout) {
 			// Runs during compile
 			return {

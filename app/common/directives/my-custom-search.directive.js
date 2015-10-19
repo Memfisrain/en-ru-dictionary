@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('myApp.myCustomSearch', [])
+	angular.module('myApp')
 		.directive('myCustomSearch', function(){
 			return {
 				restrict: "A",

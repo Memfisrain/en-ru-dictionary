@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('view1.dbWordsService', [])
+	angular.module('myApp.view1')
 		.factory('dbWordsService', ['$http', function($http) {
 
 			function getWord(word) {

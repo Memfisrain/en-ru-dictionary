@@ -1,7 +1,7 @@
 ;(function() {
 	"use strict";
 
-	angular.module('myApp.myGetButton', [])
+	angular.module('myApp')
 		.directive('myGetButton', function() {
 			// Runs during compile
 			return {

@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
   <header id="header" class="clearfix">
-    <a class="my-title" href="#">checkingknowledge.by</a>
+    <a class="my-title" href="#/view1">checkingknowledge.by</a>
     <ul class="menu">
       <li><a href="#/view1">editing words</a></li>
       <li><a href="#/view2">checking knowledge</a></li>
@@ -41,22 +41,23 @@
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="app.js"></script>
-  <script src="js/animation.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view1/dbWordsService.js"></script>
   <script src="view1/controller.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="view2/controller.js"></script>
 
-  <script src="directives/my-blur-after-add.directive.js"></script>
-  <script src="directives/my-blur-after-save.directive.js"></script>
-  <script src="directives/my-custom-search.directive.js"></script>
-  <script src="directives/my-check-status.directive.js"></script>
-  <script src="directives/my-get-button.directive.js"></script>
-  <script src="directives/my-button.directive.js"></script>
+  <script src="common/directives/my-blur-after-add.directive.js"></script>
+  <script src="common/directives/my-blur-after-save.directive.js"></script>
+  <script src="common/directives/my-custom-search.directive.js"></script>
+  <script src="common/directives/my-check-status.directive.js"></script>
+  <script src="common/directives/my-get-button.directive.js"></script>
+  <script src="common/directives/my-button.directive.js"></script>
 
+  <script src="common/filters/word-with-comma.filter.js"></script>
 
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+  <script src="common/services/Vocabulary.service.js"></script>
+
+  
 </body>
 </html>
