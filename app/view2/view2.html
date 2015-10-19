@@ -1,5 +1,5 @@
 <div class="my-container">
-	<div class="test-reqform-container" ng-hide="testBegin">
+	<div class="test-reqform-container" ng-hide="testBegin || showIncorrectAnswers">
 		<div class="test-reqform">
 			<label for="countWords">Введите количество слов для теста</label>
 			<input ng-model="countWords" placeholder="20">
@@ -35,6 +35,7 @@
 				<span>{{o.answer}}</span>
 			</li>
 		</ul>
+		<button class="my-repeatbtn"><span class="glyphicon glyphicon-repeat"></span></button>
 	</div>
 	
 </div>

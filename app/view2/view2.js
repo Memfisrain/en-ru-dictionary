@@ -18,6 +18,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
 .controller('View2Ctrl', ["$scope", "words", function($scope, words) {
 	$scope.testBegin = false;
+	$scope.showIncorrectAnswers = false;
 	$scope.startTest = startTest;
 	$scope.check = check;
 	$scope.endTest = endTest;
@@ -25,7 +26,7 @@ angular.module('myApp.view2', ['ngRoute'])
 	var gen, startTime;
 
 	function startTest() {
-		$scope.wordsArray = getWordsInArbitraryOrder(words);
+		$scope.wordsArray = getWordsInArbitraryOrder(words.slice(0));
 		$scope.testBegin = true;
 		$scope.questionCount = +$scope.countWords || $scope.wordsArray.length;
 		$scope.questionIndex = 0;

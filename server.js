@@ -68,7 +68,10 @@ app.use("/search", function(req, res, next) {
 						allWords[0] = mainWord;
 					}
 
-					res.send(allWords);
+					res.send({
+						allTranslatedWords: allWords,
+						originalWord: word
+					});
 				} else {
 					console.log("Произошла ошибка при получение страницы результатов поиска");
 				}
@@ -99,6 +102,11 @@ app.use("/save", function(req, res, next) {
 
 });
 
+app.use("/getjson", function(req, res, next) {
+	console.log(req)
+	res.json("OK");
+});
+
 app.use("/", function(req, res, next) {
 	res.sendFile(__dirname + req.path, function(err) {
 		if (err) {
@@ -114,12 +122,3 @@ app.use("/", function(req, res, next) {
 app.listen(3030, function() {
 	console.log("Server running on 3030");
 });
-
-
-function formatingData(key, value) {
-	if (typeof value === "string") {
-		return value.toLowerCase();
-	} else {
-		return value;
-	}
-}
